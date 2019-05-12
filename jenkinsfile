@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
-
     stages 
+	{
         stage('SCM Checkout'){
           git 'https://github.com/prakashk0301/maven-project'
         }
-  }
-    {
+
+
         stage ('Compile Stage') {
 
             steps {
@@ -40,9 +40,7 @@ pipeline {
                 sshagent (credentials: ['e0f080b4-9f1e-41dd-9948-c58bca500d4d']) {
                     sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@13.233.161.207:/var/lib/tomcat/webapps'
                     }
-                    }
-                    }
-         
+                }
+                }
+	}
 }
-}
-
