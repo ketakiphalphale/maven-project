@@ -34,10 +34,11 @@ pipeline {
                 }
             }
         }
-        stage ('sonarcube') {
+        stage ('build and sonarqube analysis') {
             steps {
-            withMaven(maven : 'Sonarjob1') {
-                sh 'clean install sonar:sonar'
+                withSonarQubeEnv('sonar'){
+                    withMaven(maven : 'LocalMaven') {
+                        sh 'mvn clean install sonar:sonar'
                 }
              }
          }    
