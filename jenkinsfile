@@ -34,7 +34,12 @@ pipeline {
                 }
             }
         }
-        
-         
+        stage ('sonarcube') {
+            steps {
+            withMaven(maven : 'Sonarjob1') {
+                sh 'clean install sonar:sonar'
+                }
+             }
+         }    
 }
 }
